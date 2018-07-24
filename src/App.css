@@ -1,0 +1,115 @@
+div{
+  box-sizing: border-box;
+}
+.App {
+  /* text-align: center; */
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  /* height: 150px; */
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+.flex-container {
+  display: flex;
+  flex-wrap: nowrap;
+  /* background-color: DodgerBlue; */
+}
+
+.flex-container > div {
+  margin: 10px;
+  flex-grow:1;
+}
+.compareCell{
+  background-color:hsla(178, 100%, 35%, .3);
+  position:relative;
+}
+.compareCellContainer{
+  width:100%;
+}
+.compareButton{
+  color: white;
+  background-color: hsla(178, 100%, 35%, 1);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.thumbnail-img{
+  width:200px;
+  border: 2px solid hsla(178, 100%, 35%, .5);
+  margin:auto;
+}
+.remove{
+  position: absolute;
+  margin:1rem;
+  background-color: hsla(178, 100%, 35%, .5);
+  top:0px;
+  padding:.5rem;
+  right:0px;
+  color:white;
+}
+.dataKey{
+  background-color: white;
+  /* color:hsla(178, 100%, 35%, 1); */
+  color:hsla(178, 0%, 40%, 1);
+  font-weight: bold;
+  padding:.3rem;
+  /* letter-spacing: .05rem; */
+  margin: 1rem 0rem 1rem 1rem;
+}
+.dataValue{
+  background-color: hsla(178, 100%, 95%, 1);
+  color:hsla(178, 0%, 30%, 1);
+  margin: 1rem 1rem 1rem .5rem;
+  /* font-weight: bold; */
+  padding:.3rem;
+}
+.tags{
+  margin:.5em .25em;
+}
+input{
+  font-size: 1.1rem;
+  padding:.6rem;
+}
+/* - - - - - -  */
+.padding1rem{
+  padding:1rem;
+}
+.margin1rem{
+  margin:1rem;
+}
+.round-corners{
+  border-radius: 5px;
+}
+.grey-border{
+  border: 1px solid grey;
+}
+.textCenter{
+  text-align:center;
+}
+.whiteBg{
+  background-color:white;
+}
+.clickCursor{
+  cursor: pointer;
+}
+.float{
+  float:left;
+}
+.inline-block{
+  display:inline-block;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
