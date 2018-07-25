@@ -1,4 +1,4 @@
-div{
+*{
   box-sizing: border-box;
 }
 .App {
@@ -20,19 +20,23 @@ div{
 .App-title {
   font-size: 1.5em;
 }
-.flex-container {
+/* .flex-container {
   display: flex;
   flex-wrap: nowrap;
-  /* background-color: DodgerBlue; */
+  /* background-color: DodgerBlue;
 }
 
 .flex-container > div {
   margin: 10px;
   flex-grow:1;
-}
+} */
 .compareCell{
   background-color:hsla(178, 100%, 35%, .3);
   position:relative;
+  width:40%;
+  float:left;
+  display:inline-block;
+  margin: 2%;
 }
 .compareCellContainer{
   width:100%;
@@ -66,6 +70,7 @@ div{
   /* letter-spacing: .05rem; */
   margin: 1rem 0rem 1rem 1rem;
 }
+
 .dataValue{
   background-color: hsla(178, 100%, 95%, 1);
   color:hsla(178, 0%, 30%, 1);
@@ -73,12 +78,21 @@ div{
   /* font-weight: bold; */
   padding:.3rem;
 }
+.dataValue{
+  background-color: hsla(178, 50%, 95%, 1);
+  color:hsla(178, 0%, 30%, 1);
+  margin: 1rem 1rem 1rem .5rem;
+  /* font-weight: bold; */
+  padding:.3rem;
+}
+
 .tags{
   margin:.5em .25em;
 }
 input{
   font-size: 1.1rem;
   padding:.6rem;
+  width:80%;
 }
 /* - - - - - -  */
 .padding1rem{

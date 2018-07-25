@@ -1,6 +1,7 @@
 import React from 'react';
 import UrlInput from './UrlInput';
 import DataElement from './DataElement';
+import ScoreSheet from './ScoreSheet';
 
 class ComparisonCard extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ class ComparisonCard extends React.Component {
     this.state = {
       inputUrl: null,
       urlSubmit: false,
-      videoDetails: null,
+      // videoDetails: null,
     };
   }
 
@@ -16,50 +17,32 @@ class ComparisonCard extends React.Component {
     let stateUpdate = event.target.id;
     this.setState({[stateUpdate]: event.target.value});
     // console.log(event.target.value);
-    console.log(this.state.inputUrl);
+    // console.log(this.state.inputUrl);
   }
   submitURL = (event) => {
-    console.log(this.state.urlSubmit);
+    console.log("yee1");
 
     let apiURL = this.state.inputUrl;
     const patt1 = /\?v=.*/g;
     let videoID = apiURL.match(patt1)[0].split("=")[1];
-    apiURL = `https://www.googleapis.com/youtube/v3/videos?id=${videoID}&key=AIzaSyCYC8Kd7YsRxYGm0ZnqhIn73DqR4dbhzqk&part=snippet,contentDetails,statistics`
+    apiURL = `https://www.googleapis.com/youtube/v3/videos?id=${videoID}&key=AIzaSyCYC8Kd7YsRxYGm0ZnqhIn73DqR4dbhzqk&part=snippet,contentDetails,statistics`;
 
-fetch(this.state.inputUrl)
-    fetch(apiURL)
-    .then(results => {
-      return results.json();
-    })
-    .then(data => {
+    this.props.addVideoFunc(apiURL, ()=>{
       this.setState({
         inputUrl: this.state.inputUrl,
         urlSubmit: true,
-        videoDetails: {
-          Title: data["items"][0]["snippet"]["title"],
-          Author: data["items"][0]["snippet"]["channelTitle"],
-          Runtime: data["items"][0]["contentDetails"]["duration"],
-          Captioning: data["items"][0]["contentDetails"]["caption"],
-          Views: data["items"][0]["statistics"]["viewCount"],
-          Likes: data["items"][0]["statistics"]["likeCount"],
-          Dislikes: data["items"][0]["statistics"]["dislikeCount"],
-          Comments: data["items"][0]["statistics"]["commentCount"],
-          Tags: data["items"][0]["snippet"]["tags"],
-          Thumbnail: data["items"][0]["snippet"]["thumbnails"]["medium"]['url'],
-        }
       })
-    })
-    console.log(this.state);
+    });
   }
   clearComparison = (event) => {
     this.setState({urlSubmit: false});
-    console.log(this.state.urlSubmit);
+    // console.log(this.state.urlSubmit);
   }
 
 
 
   render() {
-    const {urlSubmit, inputUrl,videoDetails} = this.state;
+    const {urlSubmit, inputUrl} = this.state;
 
     if (!urlSubmit) {
       return (<div className="compareCell padding1rem round-corners">
@@ -69,23 +52,28 @@ fetch(this.state.inputUrl)
       </div>);
     } else {
 
-      const videoPropertiesArray = Object.keys(this.state.videoDetails).map((property,i) => {
-        if(property != "Tags" && property !="Thumbnail"){
-          return <DataElement key={property} datakey={property} datavalue={videoDetails[property]}/>
+      const VideoData = this.props.videoDeets[this.props.index];
+      const videoPropertiesArray = Object.keys(VideoData).map((property,i) => {
+        if(property != "Tags" && property !="Thumbnail" && property !="Title"){
+          return(<div>
+            <DataElement key={property} datakey={property} datavalue={VideoData[property]}/>
+            <ScoreSheet key={`${property}Score`} datakey={property} comparison={this.props.comparison[property]} index={this.props.index} />
+          </div>)
         }
         else if (property === "Tags"){
           return <DataElement key={property} datakey={property} datavalue={''}/>
         }
       })
-
-      const tagsArray =videoDetails.Tags.map((tag, i)=>{
+      const tagsArray =VideoData.Tags.map((tag, i)=>{
             return <DataElement key={tag} datakey='' datavalue={tag}/>
           })
+
 
       return (<div className="compareCell padding1rem round-corners">
         <div className="remove round-corners clickCursor" onClick={this.clearComparison}>X</div>
         <div className="textCenter">
-        <img className="thumbnail-img" src={videoDetails.Thumbnail}/>
+        <h3>{VideoData.Title}</h3>
+        <img className="thumbnail-img" src={VideoData.Thumbnail}/>
         </div>
 
 
